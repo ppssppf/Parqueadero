@@ -20,12 +20,12 @@ const CeldaSchema = new Schema({
   },
   placaVehiculo: {
     type: String,
-    maxlength: 6,
+    maxlength: [6,"maximo 6 caracteres"],
     default: ''
   },
   fechaIngreso: {
     type: Date,
-    default: Date.now
+    default: ''
   },
   fechaSalida: {
     type: Date

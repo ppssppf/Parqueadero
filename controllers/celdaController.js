@@ -1,3 +1,4 @@
+import celda from '../models/celda.js';
 import Celda from '../models/celda.js';
 import bcrypt from 'bcryptjs';
 
@@ -31,6 +32,7 @@ export async function parquearVehiculo(req, res) {
         celdaDisponible.placaVehiculo = placaVehiculo;
         celdaDisponible.estado = 'no disponible';
         celdaDisponible.fechaIngreso = new Date();
+        celdaDisponible.fechaSalida = null;
 
         const pinRaw = `${celdaDisponible.numeroCelda}${placaVehiculo}`;
         const salt = await bcrypt.genSalt(10);
@@ -82,7 +84,7 @@ export async function liberarCelda(req, res) {
         celda.estado = 'disponible';
         celda.placaVehiculo = '';
         celda.fechaIngreso = null;
-        celda.fechaSalida = null;
+        celda.fechaSalida = new Date();
         celda.pin = '';
 
         await celda.save();
